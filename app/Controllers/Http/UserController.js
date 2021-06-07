@@ -13,10 +13,12 @@ class UserController {
         return user
     }
 
-    async index({ request, response, view }) {
-        console.log(request['_body']['username'])
+    async index({ auth, request, response, view }) {
+       
+        if (auth) {
         const users = await Database.from('users').where('username', request['_body']['username'])
         return users
+        }
     }
 
     async destroy({ params, request, response }) {
